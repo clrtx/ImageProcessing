@@ -3,17 +3,13 @@ class Converter:
         return round(x * 100)
 
     def rgb_to_cmyk(self, red, green, blue):
-        # Переводим RGB в диапазоне [0, 255] в процентный диапазон [0, 1]
+
         r = red / 255
         g = green / 255
         b = blue / 255
 
-
-
-        # Находим минимальное значение из CMY
         k = 1 - max(r, g, b)
 
-        # Если K равно нулю, все остальные компоненты также равны нулю
         if k == 1:
             return 0, 0, 0, 1
 

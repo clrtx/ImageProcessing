@@ -24,6 +24,14 @@ class Form(QWidget):
 
         self.ui.file_browse.clicked.connect(self.open_file_dialog)
 
+        self.connectInputs()
+
+
+        # show the login window
+        self.show()
+
+
+    def connectInputs(self):
         self.connect(self.ui.r_rgb)
         self.connect(self.ui.g_rgb)
         self.connect(self.ui.b_rgb)
@@ -49,8 +57,6 @@ class Form(QWidget):
         self.connect(self.ui.cb_ycbcr)
         self.connect(self.ui.cr_ycbcr)
 
-        # show the login window
-        self.show()
 
     def connect(self, input):
         input.editingFinished.connect(lambda: self.calculate_models(input))
