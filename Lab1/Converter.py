@@ -3,7 +3,7 @@ class Converter:
         return round(x * 100)
 
     def rgb_to_cmyk(self, red, green, blue):
-
+        # нормализация значений
         r = red / 255
         g = green / 255
         b = blue / 255
@@ -21,7 +21,7 @@ class Converter:
         return round(c * 100), round(m * 100), round(y * 100), round(k * 100)
 
     def rgb_to_hsl(self, red, green, blue):
-        # Переводим RGB в диапазоне [0, 255] в процентный диапазон [0, 1]
+        # нормализация значений
         r = red / 255
         g = green / 255
         b = blue / 255
@@ -32,7 +32,6 @@ class Converter:
 
         l = 0
 
-        # Черный или белый цвет
         if delta == 0:
             h = 0
             l = (max_color_value + min_color_value) / 2
