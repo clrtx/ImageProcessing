@@ -192,7 +192,7 @@ class Ui_Form(QWidget):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Lab1"))
         self.deviceSize.setText(_translate("Form", "Размер на диске:"))
         self.imageSize.setText(_translate("Form", "Разрешение:"))
         self.format.setText(_translate("Form", "Формат файла:"))

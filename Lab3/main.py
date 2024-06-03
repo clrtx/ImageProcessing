@@ -22,7 +22,8 @@ class Form(QWidget):
         self.ui.setupUi(self)
 
         self.ui.file_browse.clicked.connect(self.open_file_dialog)
-
+        self.ui.kernelWidth.setValue(3)
+        self.ui.kernelHeight.setValue(3)
         # show the login window
         self.show()
 
@@ -62,8 +63,12 @@ class Form(QWidget):
 
                 image = self.qimage_to_cv2(self.ui.image.pixmap().toImage())
                 image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+                threshold_value = 127
+                _, binary_image = cv2.threshold(image, threshold_value, 255, cv2.THRESH_BINARY)
+
                 height, width = image.shape
-                self.ui.modifiedImage.setPixmap(QPixmap.fromImage(QImage(image.data, width, height, width, QImage.Format.Format_Grayscale8)))
+                self.ui.modifiedImage.setPixmap(QPixmap.fromImage(QImage(binary_image.data, width, height, width, QImage.Format.Format_Grayscale8)))
 
                 self.ui.erode.clicked.connect(self.erode)
                 self.ui.dilate.clicked.connect(self.dilate)
@@ -76,13 +81,10 @@ class Form(QWidget):
     def erode(self):
         kernel = np.ones((self.ui.kernelWidth.value(), self.ui.kernelHeight.value()), np.uint8)  # Например, квадратное ядро размером 5x5
 
-        image = self.qimage_to_cv2(self.ui.image.pixmap().toImage())
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        # Применяем операцию эрозии к изображению
+        image = self.qimage_to_cv2(self.ui.modifiedImage.pixmap().toImage())
+
         eroded_image = cv2.erode(image, kernel, iterations=1)
 
-        # Отображаем исходное и скорректированное изображения
-        cv2.imshow('Original Image', image)
         cv2.imshow('Eroded Image', eroded_image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
@@ -90,14 +92,10 @@ class Form(QWidget):
     def dilate(self):
         kernel = np.ones((self.ui.kernelWidth.value(), self.ui.kernelHeight.value()), np.uint8)  # Например, квадратное ядро размером 5x5
 
-        image = self.qimage_to_cv2(self.ui.image.pixmap().toImage())
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        # Применяем операцию эрозии к изображению
+        image = self.qimage_to_cv2(self.ui.modifiedImage.pixmap().toImage())
         dilated_image = cv2.dilate(image, kernel, iterations=1)
 
-        # Отображаем исходное и скорректированное изображения
-        cv2.imshow('Градац', image)
-        cv2.imshow('Дилатация', dilated_image)
+        cv2.imshow('Dilated image', dilated_image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
@@ -105,13 +103,10 @@ class Form(QWidget):
         kernel = np.ones((self.ui.kernelWidth.value(), self.ui.kernelHeight.value()),
                          np.uint8)  # Например, квадратное ядро размером 5x5
 
-        image = self.qimage_to_cv2(self.ui.image.pixmap().toImage())
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        # Применяем операцию эрозии к изображению
+        image = self.qimage_to_cv2(self.ui.modifiedImage.pixmap().toImage())
+
         closed_image = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel)
 
-        # Отображаем исходное и скорректированное изображения
-        cv2.imshow('Original Image', image)
         cv2.imshow('Closed Image', closed_image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
@@ -120,13 +115,10 @@ class Form(QWidget):
         kernel = np.ones((self.ui.kernelWidth.value(), self.ui.kernelHeight.value()),
                          np.uint8)  # Например, квадратное ядро размером 5x5
 
-        image = self.qimage_to_cv2(self.ui.image.pixmap().toImage())
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        # Применяем операцию эрозии к изображению
+        image = self.qimage_to_cv2(self.ui.modifiedImage.pixmap().toImage())
+
         open_image = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel)
 
-        # Отображаем исходное и скорректированное изображения
-        cv2.imshow('Original Image', image)
         cv2.imshow('Open Image', open_image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
@@ -135,13 +127,9 @@ class Form(QWidget):
         kernel = np.ones((self.ui.kernelWidth.value(), self.ui.kernelHeight.value()),
                          np.uint8)  # Например, квадратное ядро размером 5x5
 
-        image = self.qimage_to_cv2(self.ui.image.pixmap().toImage())
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        # Применяем операцию эрозии к изображению
+        image = self.qimage_to_cv2(self.ui.modifiedImage.pixmap().toImage())
         gradient_image = cv2.morphologyEx(image, cv2.MORPH_GRADIENT, kernel)
 
-        # Отображаем исходное и скорректированное изображения
-        cv2.imshow('Original Image', image)
         cv2.imshow('Gradient Image', gradient_image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
@@ -150,13 +138,9 @@ class Form(QWidget):
         kernel = np.ones((self.ui.kernelWidth.value(), self.ui.kernelHeight.value()),
                          np.uint8)  # Например, квадратное ядро размером 5x5
 
-        image = self.qimage_to_cv2(self.ui.image.pixmap().toImage())
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        # Применяем операцию эрозии к изображению
+        image = self.qimage_to_cv2(self.ui.modifiedImage.pixmap().toImage())
         blackhat_image = cv2.morphologyEx(image, cv2.MORPH_BLACKHAT, kernel)
 
-        # Отображаем исходное и скорректированное изображения
-        cv2.imshow('Original Image', image)
         cv2.imshow('Black Hat Image', blackhat_image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()

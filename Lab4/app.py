@@ -175,7 +175,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Lab4"))
         self.file_browse.setText(_translate("Form", "Загрузить"))
         self.label.setText(_translate("Form", "Оригинальное изображение"))
         self.sharpness.setText(_translate("Form", "Резкость"))
@@ -186,4 +186,4 @@ class Ui_Form(object):
         self.medianFilter.setText(_translate("Form", "Медианная фильтрация"))
         self.groupBox_3.setTitle(_translate("Form", "Границы"))
         self.detectorCanny.setText(_translate("Form", "Детектор Canny"))
-        self.operatorRoberts.setText(_translate("Form", "Оператор Робертс"))
+        self.operatorRoberts.setText(_translate("Form", "Оператор Робертса"))

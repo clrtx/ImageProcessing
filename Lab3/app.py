@@ -89,10 +89,10 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Lab3"))
         self.file_browse.setText(_translate("Form", "Загрузить"))
         self.label.setText(_translate("Form", "Оригинальное изображение"))
-        self.label_3.setText(_translate("Form", "Измененное изображение"))
+        self.label_3.setText(_translate("Form", "Бинарное изображение"))
         self.groupBox_2.setTitle(_translate("Form", "Ядро обработки"))
         self.groupBox_3.setTitle(_translate("Form", "Морфологическая операция"))
         self.erode.setText(_translate("Form", "Эрозия"))
